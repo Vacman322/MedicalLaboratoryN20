@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2cb87a2e3b7a4b32a8efe7c6ba2a4ee1" Name="Diagram1">
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.Analyzer" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.Blood" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.BloodService" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.EnterHistory" Width="1.5" PointX="3" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.InsuranceCompany" Width="1.5" PointX="1.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.Patient" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.Service" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.SocialType" Width="1.5" PointX="1.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.Status" Width="1.5" PointX="0.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.Type" Width="1.5" PointX="1.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.User" Width="1.5" PointX="0.75" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalLaboratoryN20Model.UserService" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_BloodService_Analyzer" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_Blood_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_BloodService_Blood" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_BloodService_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_BloodService_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_BloodService_User" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_EnterHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_Patient_InsuranceCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_Patient_SocialType" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_UserService_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_User_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalLaboratoryN20Model.FK_UserService_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

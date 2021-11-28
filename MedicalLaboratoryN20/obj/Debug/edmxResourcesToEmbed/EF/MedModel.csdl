@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicalLaboratoryN20Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Analyzer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BloodService" Relationship="Self.FK_BloodService_Analyzer" FromRole="Analyzer" ToRole="BloodService" />
+  </EntityType>
+  <EntityType Name="Blood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="PatientID" Type="Int32" Nullable="false" />
+    <Property Name="Barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="Int64" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Blood_Patient" FromRole="Blood" ToRole="Patient" />
+    <NavigationProperty Name="BloodService" Relationship="Self.FK_BloodService_Blood" FromRole="Blood" ToRole="BloodService" />
+  </EntityType>
+  <EntityType Name="BloodService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BloodId" Type="Int32" Nullable="false" />
+    <Property Name="ServiceCode" Type="Int32" Nullable="false" />
+    <Property Name="Finished" Type="Int64" />
+    <Property Name="Accepted" Type="Boolean" Nullable="false" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="AnalyzerID" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Result" Type="Decimal" Precision="10" Scale="5" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="LeadTimeInDays" Type="Int32" />
+    <NavigationProperty Name="Analyzer" Relationship="Self.FK_BloodService_Analyzer" FromRole="BloodService" ToRole="Analyzer" />
+    <NavigationProperty Name="Blood" Relationship="Self.FK_BloodService_Blood" FromRole="BloodService" ToRole="Blood" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_BloodService_Service" FromRole="BloodService" ToRole="Service" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_BloodService_Status" FromRole="BloodService" ToRole="Status" />
+    <NavigationProperty Name="User" Relationship="Self.FK_BloodService_User" FromRole="BloodService" ToRole="User" />
+  </EntityType>
+  <EntityType Name="EnterHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserLogin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
+    <Property Name="IDUser" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_EnterHistory_User" FromRole="EnterHistory" ToRole="User" />
+  </EntityType>
+  <EntityType Name="InsuranceCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Inn" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Rs" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="BIK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EIN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_InsuranceCompany" FromRole="InsuranceCompany" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DayOfBirth" Type="Int64" Nullable="false" />
+    <Property Name="PassS" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PassN" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SocialSecNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="InsuranceCompanyId" Type="Int32" Nullable="false" />
+    <Property Name="SocialTypeID" Type="Int32" Nullable="false" />
+    <Property Name="UA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IpAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Guid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Blood" Relationship="Self.FK_Blood_Patient" FromRole="Patient" ToRole="Blood" />
+    <NavigationProperty Name="InsuranceCompany" Relationship="Self.FK_Patient_InsuranceCompany" FromRole="Patient" ToRole="InsuranceCompany" />
+    <NavigationProperty Name="SocialType" Relationship="Self.FK_Patient_SocialType" FromRole="Patient" ToRole="SocialType" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="DurationInHours" Type="Int32" />
+    <Property Name="MeanDeviation" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="BloodService" Relationship="Self.FK_BloodService_Service" FromRole="Service" ToRole="BloodService" />
+    <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_Service" FromRole="Service" ToRole="UserService" />
+  </EntityType>
+  <EntityType Name="SocialType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_SocialType" FromRole="SocialType" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BloodService" Relationship="Self.FK_BloodService_Status" FromRole="Status" ToRole="BloodService" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Type" FromRole="Type" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Patronymic" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="LastEnter" Type="DateTime" Precision="3" />
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="IpAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BloodService" Relationship="Self.FK_BloodService_User" FromRole="User" ToRole="BloodService" />
+    <NavigationProperty Name="EnterHistory" Relationship="Self.FK_EnterHistory_User" FromRole="User" ToRole="EnterHistory" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_User_Type" FromRole="User" ToRole="Type" />
+    <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_User" FromRole="User" ToRole="UserService" />
+  </EntityType>
+  <EntityType Name="UserService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_UserService_Service" FromRole="UserService" ToRole="Service" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserService_User" FromRole="UserService" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_BloodService_Analyzer">
+    <End Role="Analyzer" Type="Self.Analyzer" Multiplicity="1" />
+    <End Role="BloodService" Type="Self.BloodService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Analyzer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BloodService">
+        <PropertyRef Name="AnalyzerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Blood_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="Blood" Type="Self.Blood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Blood">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BloodService_Blood">
+    <End Role="Blood" Type="Self.Blood" Multiplicity="1" />
+    <End Role="BloodService" Type="Self.BloodService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blood">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BloodService">
+        <PropertyRef Name="BloodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BloodService_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="BloodService" Type="Self.BloodService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="BloodService">
+        <PropertyRef Name="ServiceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BloodService_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="BloodService" Type="Self.BloodService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BloodService">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BloodService_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="BloodService" Type="Self.BloodService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BloodService">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnterHistory_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="EnterHistory" Type="Self.EnterHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnterHistory">
+        <PropertyRef Name="IDUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_InsuranceCompany">
+    <End Role="InsuranceCompany" Type="Self.InsuranceCompany" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InsuranceCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="InsuranceCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_SocialType">
+    <End Role="SocialType" Type="Self.SocialType" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SocialType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="SocialTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserService_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="UserService">
+        <PropertyRef Name="ServiceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserService_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserService">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicalLaboratoryN20Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Analyzer" EntityType="Self.Analyzer" />
+    <EntitySet Name="Blood" EntityType="Self.Blood" />
+    <EntitySet Name="BloodService" EntityType="Self.BloodService" />
+    <EntitySet Name="EnterHistory" EntityType="Self.EnterHistory" />
+    <EntitySet Name="InsuranceCompany" EntityType="Self.InsuranceCompany" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" />
+    <EntitySet Name="Service" EntityType="Self.Service" />
+    <EntitySet Name="SocialType" EntityType="Self.SocialType" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="Type" EntityType="Self.Type" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserService" EntityType="Self.UserService" />
+    <AssociationSet Name="FK_BloodService_Analyzer" Association="Self.FK_BloodService_Analyzer">
+      <End Role="Analyzer" EntitySet="Analyzer" />
+      <End Role="BloodService" EntitySet="BloodService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Blood_Patient" Association="Self.FK_Blood_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Blood" EntitySet="Blood" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BloodService_Blood" Association="Self.FK_BloodService_Blood">
+      <End Role="Blood" EntitySet="Blood" />
+      <End Role="BloodService" EntitySet="BloodService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BloodService_Service" Association="Self.FK_BloodService_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="BloodService" EntitySet="BloodService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BloodService_Status" Association="Self.FK_BloodService_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="BloodService" EntitySet="BloodService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BloodService_User" Association="Self.FK_BloodService_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="BloodService" EntitySet="BloodService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnterHistory_User" Association="Self.FK_EnterHistory_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="EnterHistory" EntitySet="EnterHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_InsuranceCompany" Association="Self.FK_Patient_InsuranceCompany">
+      <End Role="InsuranceCompany" EntitySet="InsuranceCompany" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_SocialType" Association="Self.FK_Patient_SocialType">
+      <End Role="SocialType" EntitySet="SocialType" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="UserService" EntitySet="UserService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Type" Association="Self.FK_User_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserService_User" Association="Self.FK_UserService_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserService" EntitySet="UserService" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
